@@ -1,13 +1,9 @@
-import os
-import sys
-
 import pytest
 
+# Add the src directory to the PYTHONPATH
+# sys.path.append(os.path.join(os.path.dirname(__file__), "..", "src"))
 from app.data.training_dataset import MyETL
 from app.model.dummy import DummyModel
-
-# Add the src directory to the PYTHONPATH
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "src"))
 
 
 @pytest.fixture

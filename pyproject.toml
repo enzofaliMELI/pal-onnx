@@ -8,6 +8,9 @@ authors = ["Enzo Faliveni <enzofali.ef@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 pytest = "^8.3.1"
+onnx = "^1.16.1"
+onnxruntime = "^1.18.1"
+torch = "2.0.1"
 
 [tool.poetry.dev-dependencies]
 
