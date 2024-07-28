@@ -1,4 +1,4 @@
-from core.utils.constants import OnnxVersion
+from core.conf.settings import OnnxVersion
 from onnx import ModelProto, TensorProto
 from onnx.helper import (
     make_graph,
@@ -11,7 +11,9 @@ from onnx.helper import (
 
 
 class Mapper:
-    def __init__(self, vocabulary: dict, oov_token: int = 1, output_vector_length: int = 15) -> None:
+    def __init__(
+        self, vocabulary: dict, oov_token: int = 1, output_vector_length: int = 15
+    ) -> None:
         """
         Mapper
         class constructor.
@@ -65,7 +67,9 @@ class Mapper:
 
     def model(self) -> ModelProto:
         # Input string Tensor: [["my", "clean", "query", "oov"]]
-        string_normalized = make_tensor_value_info("string_normalized", TensorProto.STRING, [1, None])
+        string_normalized = make_tensor_value_info(
+            "string_normalized", TensorProto.STRING, [1, None]
+        )
 
         # Category Mapper node
         # Mapper Tensor: [[1, 2, 3, -1]]
@@ -81,10 +85,14 @@ class Mapper:
 
         # Pad inputs:
         # Constant value of [0, 0, 0, output_length]
-        pads_data = make_tensor("pads_data", TensorProto.INT64, [4], [0, 0, 0, self.output_length])
+        pads_data = make_tensor(
+            "pads_data", TensorProto.INT64, [4], [0, 0, 0, self.output_length]
+        )
 
         # Constant node for pads
-        pads_constant_node = make_node("Constant", inputs=[], outputs=["pads"], value=pads_data)
+        pads_constant_node = make_node(
+            "Constant", inputs=[], outputs=["pads"], value=pads_data
+        )
 
         # Padding node
         # Pad Tensor (pad = [0, 0, 0, 3]): [[1, 2, 3, -1, 0, 0, 0]]
@@ -98,14 +106,22 @@ class Mapper:
         # Slice inputs:
         # Constant start value of [0, 0] (first index)
         # Constant end value of [0, output_length]
-        slice_start_data = make_tensor("slice_start_data", TensorProto.INT64, [2], [0, 0])
-        slice_end_data = make_tensor("slice_end_data", TensorProto.INT64, [2], [1, self.output_length])
+        slice_start_data = make_tensor(
+            "slice_start_data", TensorProto.INT64, [2], [0, 0]
+        )
+        slice_end_data = make_tensor(
+            "slice_end_data", TensorProto.INT64, [2], [1, self.output_length]
+        )
 
         # Constant for slice_start
-        slice_start_constant_node = make_node("Constant", inputs=[], outputs=["slice_start"], value=slice_start_data)
+        slice_start_constant_node = make_node(
+            "Constant", inputs=[], outputs=["slice_start"], value=slice_start_data
+        )
 
         # Constant for slice_end
-        slice_end_constant_node = make_node("Constant", inputs=[], outputs=["slice_end"], value=slice_end_data)
+        slice_end_constant_node = make_node(
+            "Constant", inputs=[], outputs=["slice_end"], value=slice_end_data
+        )
 
         # Slice node
         # Slice Tensor (start=[0, 0], end=[0, 3]): [[1, 2, 3]]
@@ -116,7 +132,9 @@ class Mapper:
         )
 
         # Output numeric Tensor: [[1, 2, 3]]
-        numeric_tensor = make_tensor_value_info("numeric_tensor", TensorProto.INT64, [1, self.output_length])
+        numeric_tensor = make_tensor_value_info(
+            "numeric_tensor", TensorProto.INT64, [1, self.output_length]
+        )
 
         # Create the graph with the nodes
         graph = make_graph(

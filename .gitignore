@@ -77,3 +77,4 @@ venv.bak/
 .vscode/
 
 report.xml
+.code_quality/

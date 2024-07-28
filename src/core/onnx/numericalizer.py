@@ -1,6 +1,6 @@
+from core.conf.settings import OnnxVersion
 from core.onnx.mapper import Mapper
 from core.onnx.tokenizer import Tokenizer
-from core.utils.constants import OnnxVersion
 from onnx import ModelProto
 from onnx.compose import merge_graphs
 from onnx.helper import make_model, make_opsetid
@@ -30,7 +30,9 @@ class Numericalizer:
             )
         ]
 
-        graph = merge_graphs(self.tokenizer.model().graph, self.mapper.model().graph, io_map)
+        graph = merge_graphs(
+            self.tokenizer.model().graph, self.mapper.model().graph, io_map
+        )
 
         # Specify opset versions
         onnx_model = make_model(

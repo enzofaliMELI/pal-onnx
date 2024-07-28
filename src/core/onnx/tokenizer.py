@@ -1,4 +1,4 @@
-from core.utils.constants import OnnxVersion
+from core.conf.settings import OnnxVersion
 from onnx import ModelProto, TensorProto
 from onnx.helper import (
     make_graph,
@@ -30,11 +30,15 @@ class Tokenizer:
             raise ValueError("Invalid action. Choose from 'LOWER', 'UPPER', 'NONE'.")
 
         # Validate separators parameter
-        if not isinstance(separators, list) or not all(isinstance(s, str) for s in separators):
+        if not isinstance(separators, list) or not all(
+            isinstance(s, str) for s in separators
+        ):
             raise TypeError("Separators must be a list of strings.")
 
         # Validate stopwords parameter
-        if not isinstance(stopwords, list) or not all(isinstance(s, str) for s in stopwords):
+        if not isinstance(stopwords, list) or not all(
+            isinstance(s, str) for s in stopwords
+        ):
             raise TypeError("Stopwords must be a list of strings.")
 
         self.case_change_action = case_change_action
@@ -69,7 +73,9 @@ class Tokenizer:
         )
 
         # Output string Tensor: [["my", "clean", "query", "oov"]]
-        string_normalized = make_tensor_value_info("string_normalized", TensorProto.STRING, [1, None])
+        string_normalized = make_tensor_value_info(
+            "string_normalized", TensorProto.STRING, [1, None]
+        )
 
         # Create the graph with the nodes
         graph = make_graph(

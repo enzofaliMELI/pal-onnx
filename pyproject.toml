@@ -5,6 +5,10 @@ version = "0.1.0"
 description = "PAL framework with onnx exporting"
 authors = ["Enzo Faliveni <enzofali.ef@gmail.com>"]
 
+packages = [
+    { include = "app", from = "src" }
+]
+
 [tool.poetry.dependencies]
 python = "^3.9"
 pytest = "^8.3.1"
