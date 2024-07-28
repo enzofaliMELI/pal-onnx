@@ -13,7 +13,7 @@ repos:
           - --fix
           - --quiet
           - --config
-#          - .code_quality/ruff.toml
+          - .code_quality/ruff.toml
 #      - id: ruff-format
 #        args:
 #          - --config
