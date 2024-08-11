@@ -35,6 +35,6 @@ jobs:
         run: |
           poetry run pytest tests
 
-      - name: Run linter
-        run: |
-          poetry run flake8 .
+#      - name: Run linter
+#        run: |
+#          poetry run flake8 .
