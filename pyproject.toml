@@ -17,6 +17,7 @@ onnxruntime = "^1.18.1"
 torch = "2.0.1"
 
 [tool.poetry.dev-dependencies]
+flake8 = "^6.1.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
