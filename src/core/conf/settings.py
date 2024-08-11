@@ -1,7 +1,7 @@
 from enum import Enum
 
-GCS_BUCKET_PROD = "gs://pdme000189"
-GCS_BUCKET_DEV = "gs://ddme000189"
+GCS_BUCKET_PROD = ""
+GCS_BUCKET_DEV = ""
 GCS_ROOT_BLOB = "search-score"
 GCS_ALLOWED_BLOBS = ["tmp", "processed_features"]
 GCS_FEATURES_BLOB = "processed_features"

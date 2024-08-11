@@ -7,7 +7,6 @@ from app.model.train import do_train
 
 SERIALIZED_INPUT = b"so long, and thanks for all the fish"
 DESERIALIZED_INPUT = b"so long, and thanks for all the fish"
-
 SERIALIZED_MODEL = b"so long, and thanks for all the fish"
 
 
